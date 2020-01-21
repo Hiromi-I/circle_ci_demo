@@ -10,8 +10,14 @@ jobs:
     working_directory: ~/app
     steps:
       - checkout
-      - run: npm ci
-      - run: npm run test
+      - run:
+          name: Install package
+          command: npm ci
+          working_directory: js
+      - run: 
+          name: Execute test
+          command: npm run test
+          working_directory: js
 
 workflows:
   version: 2.1
