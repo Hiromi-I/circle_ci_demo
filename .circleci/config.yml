@@ -3,6 +3,9 @@ executors:
   js-env:
     docker:
       - image: circleci/node:11.4
+  py-env:
+    docker:
+      - image: circleci/python:3.8
 
 jobs:
   js-test:
@@ -18,6 +21,25 @@ jobs:
           name: Execute test
           command: npm run test
           working_directory: js
+  py-test:
+    executor: py-env
+    working_directory: ~/app
+    environment:
+      PIPENV_VENV_IN_PROJECT: true
+    steps:
+      - checkout
+      - run:
+          name: Install pipenv
+          command: pip install pipenv
+          working_directory: python
+      - run:
+          name: Install package
+          command: pipenv install --dev
+          working_directory: python
+      - run: 
+          name: Execute test
+          command: pipenv run test
+          working_directory: python
 
 workflows:
   version: 2.1
@@ -27,3 +49,9 @@ workflows:
           filters:
             branches:
               only: /^js-.*$/
+  py:
+    jobs:
+      - py-test:
+          filters:
+            branches:
+              only: /^py-.*$/
