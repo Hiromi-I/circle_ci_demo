@@ -28,7 +28,7 @@ jobs:
     executor: py-env
     working_directory: ~/app
     environment:
-      PIPENV_VENV_IN_PROJECT: true
+      PIPENV_VENV_IN_PROJECT: "true"
     steps:
       - checkout
       - run:
