@@ -46,7 +46,6 @@ jobs:
       - slack/status
 
 workflows:
-  version: 2.1
   js:
     jobs:
       - js-test:
