@@ -51,10 +51,14 @@ workflows:
       - js-test:
           filters:
             branches:
-              only: /^js-.*$/
+              only:
+                - /^js-.*$/
+                - master
   py:
     jobs:
       - py-test:
           filters:
             branches:
-              only: /^py-.*$/
+              only:
+                - /^py-.*$/
+                - master
