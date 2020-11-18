@@ -1,4 +1,6 @@
 version: 2.1
+orbs:
+  slack: circleci/slack@3.4.2
 executors:
   js-env:
     docker:
@@ -21,11 +23,12 @@ jobs:
           name: Execute test
           command: npm run test
           working_directory: js
+      - slack/status
   py-test:
     executor: py-env
     working_directory: ~/app
     environment:
-      PIPENV_VENV_IN_PROJECT: true
+      PIPENV_VENV_IN_PROJECT: "true"
     steps:
       - checkout
       - run:
@@ -40,18 +43,22 @@ jobs:
           name: Execute test
           command: pipenv run test
           working_directory: python
+      - slack/status
 
 workflows:
-  version: 2.1
   js:
     jobs:
       - js-test:
           filters:
             branches:
-              only: /^js-.*$/
+              only:
+                - /^js-.*$/
+                - master
   py:
     jobs:
       - py-test:
           filters:
             branches:
-              only: /^py-.*$/
+              only:
+                - /^py-.*$/
+                - master
