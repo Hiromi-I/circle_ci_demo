@@ -24,11 +24,11 @@ jobs:
           command: npm run test
           working_directory: js
       - store_test_results:
-          path: reports
+          path: js/reports
       - store_artifacts:
-          path: reports
+          path: js/reports
       - store_artifacts:
-          path: coverage
+          path: js/coverage
       - slack/status
   py-test:
     executor: py-env
