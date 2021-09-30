@@ -4,11 +4,12 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "jest"
+    "test": "jest --ci --runInBand"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "jest": "^27.2.2"
+    "jest": "^27.2.2",
+    "jest-junit": "^12.3.0"
   }
 }
